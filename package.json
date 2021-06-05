@@ -4,8 +4,8 @@
   "description": "A node js backend task using OOP concept and express frame work with mongodb ",
   "main": "app.js",
   "scripts": {
-    "dev": "nodemon www/server.js",
-    "start": "node www/server.js"
+    "dev": "nodemon src/www/server.js",
+    "start": "node src/www/server.js"
   },
   "repository": {
     "type": "git",

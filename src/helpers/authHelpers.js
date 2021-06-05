@@ -2,12 +2,11 @@ const bcrypt = require("bcrypt");
 const JWT = require("jsonwebtoken");
 
 class AuthHelpers {
-    constructor(user) {
-        this.user = user
-    }
+    // constructor(user) {
+    //     this.user = user
+    // }
 
    async hashPassword(plainPassword) {
-        console.log(plainPassword);
         // checks if there is password provided
         if (!plainPassword) {
             throw new Error("Error hashing password");

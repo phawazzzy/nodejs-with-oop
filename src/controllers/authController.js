@@ -8,8 +8,9 @@ class AuthController {
         const { status, error, message, data } = result;
         if (status) {
             res.status(201).json(Responses.successResponse(message, data));
+        } else {
+            res.status(error.status || 500).json(Responses.errorResponse(error));
         }
-        res.status(error.status || 500).json(Responses.errorResponse(error));
     }
 }
 
