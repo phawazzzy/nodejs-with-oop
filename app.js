@@ -13,6 +13,7 @@ app.use(cors());
 dotenv.config();
 
 // set up route here
+const authRoute = require("./routes/auth");
 
 const { DB_URI } = process.env;
 
@@ -37,6 +38,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 // routers
+app.use("/api/v1/auth", authRoute);
 
 
 // catch 404 and forward to error handler
