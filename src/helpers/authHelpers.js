@@ -24,6 +24,10 @@ class AuthHelpers {
         const secret = process.env.ACCESS_TOKEN_SECRET;
         return JWT.sign(payload, secret, { expiresIn: "6h" })
     }
+
+    async isPasswordValid (hashedPass, plainPass) {
+        return bcrypt.compareSync(plainPass, hashedPass)
+    }
 }
 
 module.exports = new AuthHelpers();

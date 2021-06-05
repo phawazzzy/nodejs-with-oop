@@ -1,4 +1,4 @@
-const { Forbidden, InternalServerError } = require("http-errors");
+const { Forbidden, InternalServerError, Unauthorized } = require("http-errors");
 const Users = require("../models/users");
 const AuthHelpers = require("../helpers/authHelpers");
 
@@ -47,6 +47,47 @@ class AuthServices {
             }
         }
 
+    }
+
+    // user register
+    async login(payload) {
+        try {
+        const { email, password } = payload;
+
+        // check if user exist
+        const user = await Users.findOne({ email }, { __v: 0 });
+        if (!user) {
+            throw Unauthorized("User does not exist");
+        }
+        // check if password is correct
+        const checkPassword = await AuthHelpers.isPasswordValid(user.password, password);
+
+        if (!checkPassword) {
+            throw Unauthorized("invalid login credentials, please check your email or password");
+        }
+        // create token
+        const token = await AuthHelpers.generateToken({ userId: user._id });
+
+        // removed the password from the returned data
+        user.password = null;
+
+        return {
+            status: true,
+            data: {
+                user, token
+            },
+            message: "Authentication successfully",
+            error: null
+        }
+
+        } catch (error) {
+            return {
+                status: false,
+                data: null,
+                message: error.message,
+                error
+            }
+        }
     }
 }
 

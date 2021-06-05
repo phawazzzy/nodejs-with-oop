@@ -10,4 +10,10 @@ const signupValidation = Joi.object().keys({
         .required(),
 });
 
-module.exports = { signupValidation };
+const loginValidation = Joi.object().keys({
+    email: Joi.string().trim().email({ minDomainSegments: 2 }).label("email")
+        .required(),
+    password: Joi.string().trim().label("password")
+        .required(),
+})
+module.exports = { signupValidation, loginValidation };

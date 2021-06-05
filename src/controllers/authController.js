@@ -12,6 +12,17 @@ class AuthController {
             res.status(error.status || 500).json(Responses.errorResponse(error));
         }
     }
+
+    async userLogin(req, res) {
+        const result = await AuthService.login(req.body);
+        const { status, error, message, data } = result;
+        if (status) {
+            res.status(200).json(Responses.successResponse(message, data));
+        } else {
+            res.status(error.status || 500).json(Responses.errorResponse(error));
+        }
+
+    }
 }
 
 module.exports = new AuthController();
