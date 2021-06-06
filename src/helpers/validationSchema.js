@@ -17,14 +17,30 @@ const loginValidation = Joi.object().keys({
     .required()
 });
 
-// handles payload checks
-// checks if shape and dimension is passed and it is valid datatypes
 const shapeValidation = Joi.object().keys({
   shape: Joi.string().required(),
   dimensions: Joi.object().required()
 });
+
+const rectangleVal = Joi.object().keys({
+  length: Joi.number().required(),
+  breadth: Joi.number().required()
+});
+
+const triangleVal = Joi.object().keys({
+  length_a: Joi.number().required(),
+  length_b: Joi.number().required(),
+  length_c: Joi.number().required()
+});
+
+const circleVal = Joi.object().keys({
+  radius: Joi.number().required()
+});
 module.exports = {
   signupValidation,
   loginValidation,
-  shapeValidation
+  shapeValidation,
+  rectangleVal,
+  triangleVal,
+  circleVal
 };

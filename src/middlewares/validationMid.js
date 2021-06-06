@@ -13,4 +13,20 @@ const validator = (schema) => (req, res, next) => {
 
   return next();
 };
-module.exports = { validator };
+
+const shapeValidator = (schema, payload) => (req, res, next) => {
+  const validationValue = schema.validate(payload, {
+    abortEarly: false,
+    allowUnknown: true,
+    convert: false,
+    skipFunctions: true
+  });
+  if (validationValue.error) {
+    const errorMessages = validationValue.error.details.map((error) => error.message);
+
+    return res.status(422).json({ error: errorMessages });
+  }
+
+  return next();
+};
+module.exports = { validator, shapeValidator };

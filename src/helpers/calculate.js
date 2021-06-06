@@ -1,6 +1,7 @@
 /* eslint-disable camelcase */
 const { BadRequest } = require("http-errors");
-
+// const { shapeValidator } = require("../middlewares/validationMid");
+// const { rectangleVal } = require("./validationSchema");
 class Shape {
   constructor(shape, dimensions) {
     this.shape = shape;
@@ -59,6 +60,7 @@ class Shape {
     if (!this.dimensions.length || !this.dimensions.breadth) {
       throw BadRequest("rectangle data is not complete, provide only length and breadth");
     }
+
     const formula = "length * breadth";
     const calculation = `${this.dimensions.length} * ${this.dimensions.breadth}`;
     this.area = this.dimensions.length * this.dimensions.breadth;
