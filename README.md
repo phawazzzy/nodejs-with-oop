@@ -16,9 +16,12 @@ The list of supported shapes, their dimensions and formulas have been given belo
 
 ## Endpoint
 - An endpoint to authenticate a user
+    - Signup: api/v1/auth/signup
+    - login: api/v1/auth/login
 - An endpoint to perform a calculation
+    - api/v1/calculate
 - An endpoint to view previous calculations
-
+    - api/v1/calculate/all
 ## API
 This API is hosted on
 Base URL: https://abindev-test.herokuapp.com/
