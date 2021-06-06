@@ -2,6 +2,8 @@
 const { BadRequest } = require("http-errors");
 // const { shapeValidator } = require("../middlewares/validationMid");
 // const { rectangleVal } = require("./validationSchema");
+const validateShape = require("./shapeValidator");
+
 class Shape {
   constructor(shape, dimensions) {
     this.shape = shape;
@@ -36,6 +38,7 @@ class Shape {
 
   // function to compute the area of a square
   calculateSquare() {
+    validateShape();
     // check the values of the dimension
     if (Object.keys(this.dimensions).length !== 1) {
       throw BadRequest("invalid parameters for a square");

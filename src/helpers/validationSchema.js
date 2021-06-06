@@ -19,28 +19,19 @@ const loginValidation = Joi.object().keys({
 
 const shapeValidation = Joi.object().keys({
   shape: Joi.string().required(),
-  dimensions: Joi.object().required()
+  dimensions: Joi.object().keys({
+    side: Joi.number(),
+    length_a: Joi.number(),
+    length_b: Joi.number(),
+    length_c: Joi.number(),
+    radius: Joi.number(),
+    length: Joi.number(),
+    breadth: Joi.number()
+  })
 });
 
-const rectangleVal = Joi.object().keys({
-  length: Joi.number().required(),
-  breadth: Joi.number().required()
-});
-
-const triangleVal = Joi.object().keys({
-  length_a: Joi.number().required(),
-  length_b: Joi.number().required(),
-  length_c: Joi.number().required()
-});
-
-const circleVal = Joi.object().keys({
-  radius: Joi.number().required()
-});
 module.exports = {
   signupValidation,
   loginValidation,
-  shapeValidation,
-  rectangleVal,
-  triangleVal,
-  circleVal
+  shapeValidation
 };

@@ -78,5 +78,5 @@ build the docker file if you havent before
 run the docker file
 
 ```bash
-docker run -dp 3000:3000 node-with-oop
+docker run node-with-oop
 ```
