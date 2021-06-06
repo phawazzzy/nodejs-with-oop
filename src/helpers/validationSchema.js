@@ -16,4 +16,31 @@ const loginValidation = Joi.object().keys({
   password: Joi.string().trim().label("password")
     .required()
 });
-module.exports = { signupValidation, loginValidation };
+
+const shapeValidation = Joi.object().keys({
+  shape: Joi.string().required(),
+  dimensions: Joi.object().required()
+});
+
+const rectangleVal = Joi.object().keys({
+  Length: Joi.number().required(),
+  Breadth: Joi.number().required()
+});
+
+const triangleVal = Joi.object().keys({
+  length_a: Joi.number().required(),
+  length_b: Joi.number().required(),
+  length_c: Joi.number().required()
+});
+
+const circleVal = Joi.object().keys({
+  Radius: Joi.number().required()
+});
+module.exports = {
+  signupValidation,
+  loginValidation,
+  shapeValidation,
+  rectangleVal,
+  triangleVal,
+  circleVal
+};

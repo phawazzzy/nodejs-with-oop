@@ -15,6 +15,7 @@ dotenv.config();
 
 // set up route here
 const authRoute = require("./routes/auth");
+const calculatorRoute = require("./routes/calculator");
 
 const { DB_URI } = process.env;
 
@@ -39,6 +40,7 @@ app.use(express.urlencoded({ extended: false }));
 
 // routers
 app.use("/api/v1/auth", authRoute);
+app.use("/api/v1/calculate", calculatorRoute);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {

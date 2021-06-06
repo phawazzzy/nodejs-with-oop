@@ -1,6 +1,7 @@
 /* eslint-disable class-methods-use-this */
 const bcrypt = require("bcrypt");
 const JWT = require("jsonwebtoken");
+const { BadRequest } = require("http-errors");
 
 class AuthHelpers {
   // constructor(user) {
@@ -30,21 +31,26 @@ class AuthHelpers {
   }
 
   mustBeLoggedIn(req, res, next) {
-    let token = req.headers["x-access-token"] || req.headers.authorization || req.body.token;
-    if (token && token.startsWith("Bearer ")) {
-      // Remove Bearer from string
-      token = token.slice(7, token.length).trimLeft();
+    const token = req.headers.authorization;
+    if (!token) {
+      throw BadRequest("Unauthorized access: Token not found");
     }
+    if (!token.split(" ")[0]) {
+      throw BadRequest("invalid token type: provide a Bearer token");
+    }
+    const authToken = req.headers.authorization.split(" ")[1];
+
     try {
-      req.apiUser = JWT.verify(token, process.env.JWTSECRET);
+      req.apiUser = JWT.verify(authToken, process.env.ACCESS_TOKEN_SECRET);
       res.locals.user = req.apiUser;
 
       // res.locals is guaranteed to hold state over the life of a request.
       next();
     } catch (error) {
-      res.status(401).json({
+      res.status(error.status || 500).json({
         status: false,
-        message: "Sorry, you must provide a valid token."
+        message: "Sorry, you must provide a valid token.",
+        error
       });
     }
   }
