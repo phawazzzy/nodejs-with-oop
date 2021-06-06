@@ -8,15 +8,22 @@ const Calculater = require("../helpers/calculate");
 const Calculations = require("../models/calculations");
 
 class CalculatorService {
+  // service to carry out the business logic for the when the endpoint calculate is hit
   async calculater(payload, user) {
     try {
+      // gets the payload from the body
       const { shape, dimensions } = payload;
+      // change the shape letter case to lowercase
       const filteredShape = shape.toLowerCase();
+      // creates new shape instance
       const area = new Calculater(filteredShape, dimensions);
+      // call the validateDimension function in the Shape class
+      // handles the calculation and payload validation for shape
       const makeCalculation = area.validateDimension();
       if (makeCalculation.message !== "") {
         throw BadRequest(makeCalculation.message);
       }
+      // save the calculation into the database
       const calculation = await Calculations.create({
         user: user.userId,
         shape,
@@ -47,14 +54,16 @@ class CalculatorService {
     }
   }
 
+  // handles the business logic to retrieve all the calculation a user has mad
   async previousCalculation(user) {
     try {
+      // query the Database for all calculations specific to the logged in user
       const previousCalculation = await Calculations.find({ user: user.userId }, { __v: 0 })
         .populate("user", "username");
       if (!previousCalculation) {
         throw InternalServerError("Server error");
       }
-
+      // check if user has not made any calculation
       if (previousCalculation.length < 1) {
         return {
           status: true,
@@ -93,4 +102,5 @@ class CalculatorService {
   }
 }
 
+// export the class
 module.exports = new CalculatorService();

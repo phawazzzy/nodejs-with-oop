@@ -11,6 +11,7 @@ class Shape {
     this.formula = "";
   }
 
+  // function to switch the shapes and attach them to the proper function they belong to
   validateDimension() {
     switch (this.shape) {
       case "square":
@@ -32,13 +33,16 @@ class Shape {
     return this;
   }
 
+  // function to compute the area of a square
   calculateSquare() {
+    // check the values of the dimension
     if (Object.keys(this.dimensions).length !== 1) {
       throw BadRequest("invalid parameters for a square");
     }
     if (!this.dimensions.side || this.dimensions.side === "") {
       throw BadRequest("square data not complete");
     }
+
     const formula = "sides ^ 2";
     this.formula = formula;
     const calculation = `${this.dimensions.side} ** 2`;
@@ -47,6 +51,7 @@ class Shape {
     return this.area;
   }
 
+  // function to compute the area of a rectangle
   calculateRectangle() {
     if (Object.keys(this.dimensions).length < 2 || Object.keys(this.dimensions).length > 2) {
       throw BadRequest("Invalid parameters for a rectangle, provide only length and breadth");
@@ -62,6 +67,7 @@ class Shape {
     return this.area;
   }
 
+  // function to compute the area of a triangle
   calculateTriangele() {
     if (Object.keys(this.dimensions).length !== 3) {
       throw BadRequest("Invalid parameters for a triangle, provide only length_a, length_a and length_c");
@@ -81,6 +87,7 @@ class Shape {
     return this.area;
   }
 
+  // function to compute the area of a circle
   calculateCircle() {
     if (Object.keys(this.dimensions).length !== 1) {
       throw BadRequest("Invalid parameters for a circle, provide only radius");
@@ -99,6 +106,7 @@ class Shape {
   }
 
   // eslint-disable-next-line class-methods-use-this
+  // handles the shapes that are not supported
   unsupportedShape() {
     this.message = "This shape isnt supported";
     return this.message;
