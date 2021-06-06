@@ -23,7 +23,7 @@ The list of supported shapes, their dimensions and formulas have been given belo
 This API is hosted on
 Base URL: https://abindev-test.herokuapp.com/
 ## API DOCUMENTATION ON POSTMAN
-Read the docs: 
+Read the docs: https://documenter.getpostman.com/view/7357882/TzY68EBR
 
 # Want to run the app?
   ## Set up locally
