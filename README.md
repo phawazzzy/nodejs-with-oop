@@ -80,3 +80,5 @@ run the docker file
 ```bash
 docker run node-with-oop
 ```
+# Note!!!
+Create the .env file before building with docker
