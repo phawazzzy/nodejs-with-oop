@@ -20,6 +20,8 @@ class CalculatorService {
         user: user.userId,
         shape,
         dimensions,
+        calculation: makeCalculation.calculation,
+        formula: makeCalculation.formula,
         area: makeCalculation.area
       });
 

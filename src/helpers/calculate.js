@@ -7,6 +7,8 @@ class Shape {
     this.dimensions = dimensions;
     this.area = 0;
     this.message = "";
+    this.calculation = "";
+    this.formula = "";
   }
 
   validateDimension() {
@@ -37,7 +39,11 @@ class Shape {
     if (!this.dimensions.side || this.dimensions.side === "") {
       throw BadRequest("square data not complete");
     }
-    this.area = this.dimensions.side * this.dimensions.side;
+    const formula = "sides ^ 2";
+    this.formula = formula;
+    const calculation = `${this.dimensions.side} ** 2`;
+    this.calculation = calculation;
+    this.area = this.dimensions.side ** 2;
     return this.area;
   }
 
@@ -48,7 +54,11 @@ class Shape {
     if (!this.dimensions.length || !this.dimensions.breadth) {
       throw BadRequest("rectangle data is not complete, provide only length and breadth");
     }
+    const formula = "length * breadth";
+    const calculation = `${this.dimensions.length} * ${this.dimensions.breadth}`;
     this.area = this.dimensions.length * this.dimensions.breadth;
+    this.formula = formula;
+    this.calculation = calculation;
     return this.area;
   }
 
@@ -60,10 +70,14 @@ class Shape {
     if (!length_a || !length_b || !length_c) {
       throw BadRequest("triangle data is not complete");
     }
+    const formula = "√s * (s − length_a) * (s − length_b) * (s − length_c)";
     const s = (length_a + length_b + length_c) / 2;
-    const X = ((s - length_a) * (s - length_b) * (s - length_c));
+    const calculation = `√${s} * (${s} - ${length_a}) * (${s} - ${length_b})  * (${s} - ${length_c})`;
+    const X = (s * (s - length_a) * (s - length_b) * (s - length_c));
     const area = Math.sqrt(X);
     this.area = area;
+    this.calculation = calculation;
+    this.formula = formula;
     return this.area;
   }
 
@@ -75,7 +89,12 @@ class Shape {
       throw BadRequest("circle data is not complete");
     }
     const area = (Math.PI * this.dimensions.radius) ** 2;
+    const formula = "π * radius²";
+    const D = this.dimensions.radius ** 2;
+    const calculation = `${Math.PI} * ${D}`;
     this.area = area;
+    this.calculation = calculation;
+    this.formula = formula;
     return this.area;
   }
 
