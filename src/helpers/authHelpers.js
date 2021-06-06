@@ -28,6 +28,26 @@ class AuthHelpers {
   async isPasswordValid(hashedPass, plainPass) {
     return bcrypt.compareSync(plainPass, hashedPass);
   }
+
+  mustBeLoggedIn(req, res, next) {
+    let token = req.headers["x-access-token"] || req.headers.authorization || req.body.token;
+    if (token && token.startsWith("Bearer ")) {
+      // Remove Bearer from string
+      token = token.slice(7, token.length).trimLeft();
+    }
+    try {
+      req.apiUser = JWT.verify(token, process.env.JWTSECRET);
+      res.locals.user = req.apiUser;
+
+      // res.locals is guaranteed to hold state over the life of a request.
+      next();
+    } catch (error) {
+      res.status(401).json({
+        status: false,
+        message: "Sorry, you must provide a valid token."
+      });
+    }
+  }
 }
 
 module.exports = new AuthHelpers();
