@@ -19,6 +19,12 @@ The list of supported shapes, their dimensions and formulas have been given belo
 - An endpoint to perform a calculation
 - An endpoint to view previous calculations
 
+## API
+This API is hosted on
+Base URL: https://abindev-test.herokuapp.com/
+## API DOCUMENTATION ON POSTMAN
+Read the docs: 
+
 # Want to run the app?
   ## Set up locally
   To run this application locally on your PC, you should have the following installed
