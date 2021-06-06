@@ -1,16 +1,27 @@
 /* eslint-disable class-methods-use-this */
-const calculatorService = require("../services/calculatorService");
+const CalculatorService = require("../services/calculatorService");
 const Responses = require("../utils/response");
 
 class CalculatorController {
   async calculateArea(req, res) {
-    console.log(req.body);
-    const result = await calculatorService.calculater(req.body);
+    const result = await CalculatorService.calculater(req.body, res.locals.user);
     const {
       status, error, message, data
     } = result;
     if (status) {
-      res.status(201).json(Responses.successResponse(message, data));
+      res.status(200).json(Responses.successResponse(message, data));
+    } else {
+      res.status(error.status || 500).json(Responses.errorResponse(error));
+    }
+  }
+
+  async getCalculations(req, res) {
+    const result = await CalculatorService.previousCalculation(res.locals.user);
+    const {
+      status, error, message, data
+    } = result;
+    if (status) {
+      res.status(200).json(Responses.successResponse(message, data));
     } else {
       res.status(error.status || 500).json(Responses.errorResponse(error));
     }

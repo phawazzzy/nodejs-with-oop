@@ -1,7 +1,7 @@
 /* eslint-disable class-methods-use-this */
 const bcrypt = require("bcrypt");
 const JWT = require("jsonwebtoken");
-const { BadRequest } = require("http-errors");
+const { Unauthorized } = require("http-errors");
 
 class AuthHelpers {
   // constructor(user) {
@@ -33,10 +33,10 @@ class AuthHelpers {
   mustBeLoggedIn(req, res, next) {
     const token = req.headers.authorization;
     if (!token) {
-      throw BadRequest("Unauthorized access: Token not found");
+      throw Unauthorized("Unauthorized access: Token not found");
     }
     if (!token.split(" ")[0]) {
-      throw BadRequest("invalid token type: provide a Bearer token");
+      throw Unauthorized("invalid token type: provide a Bearer token");
     }
     const authToken = req.headers.authorization.split(" ")[1];
 

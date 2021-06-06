@@ -87,27 +87,3 @@ class Shape {
 }
 
 module.exports = Shape;
-
-// const square = new Shape("Square", { side: 4 });
-// const rectangle = new Shape("Rectangle", { length: 4, breadth: 4 });
-// const traingle = new Shape("Triangle", {
-//   length_a: 3,
-//   length_b: 4,
-//   length_c: 5
-// });
-// const circle = new Shape("Circle", { radius: 4 });
-
-// switch (shape) {
-//   case "Square":
-//     square.calculateSquare();
-//     break;
-//   case "Rectangle":
-//     rectangle.calculateRectangle();
-//   case "traingle":
-//     traingleFunction;
-//   case "circle":
-//     circleFunction;
-//   default:
-//     nothingToShowFunction;
-//     break;
-// }
