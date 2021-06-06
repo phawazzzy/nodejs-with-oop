@@ -13,16 +13,16 @@ class Shape {
 
   validateDimension() {
     switch (this.shape) {
-      case "Square":
+      case "square":
         this.calculateSquare();
         break;
-      case "Rectangle":
+      case "rectangle":
         this.calculateRectangle();
         break;
-      case "Triangle":
+      case "triangle":
         this.calculateTriangele();
         break;
-      case "Circle":
+      case "circle":
         this.calculateCircle();
         break;
       default:

@@ -11,7 +11,8 @@ class CalculatorService {
   async calculater(payload, user) {
     try {
       const { shape, dimensions } = payload;
-      const area = new Calculater(shape, dimensions);
+      const filteredShape = shape.toLowerCase();
+      const area = new Calculater(filteredShape, dimensions);
       const makeCalculation = area.validateDimension();
       if (makeCalculation.message !== "") {
         throw BadRequest(makeCalculation.message);
@@ -70,9 +71,11 @@ class CalculatorService {
             userId: docs.user._id,
             username: docs.user.username
           },
-          calculation: {
+          calculation_details: {
             shape: docs.shape,
             dimensions: docs.dimensions,
+            formula: docs.formula,
+            calculation: docs.calculation,
             area: docs.area
           }
         })),
