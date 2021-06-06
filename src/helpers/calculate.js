@@ -2,8 +2,6 @@
 const { BadRequest } = require("http-errors");
 // const { shapeValidator } = require("../middlewares/validationMid");
 // const { rectangleVal } = require("./validationSchema");
-const validateShape = require("./shapeValidator");
-
 class Shape {
   constructor(shape, dimensions) {
     this.shape = shape;
@@ -38,7 +36,6 @@ class Shape {
 
   // function to compute the area of a square
   calculateSquare() {
-    validateShape();
     // check the values of the dimension
     if (Object.keys(this.dimensions).length !== 1) {
       throw BadRequest("invalid parameters for a square");
@@ -51,7 +48,7 @@ class Shape {
     this.formula = formula;
     const calculation = `${this.dimensions.side} ** 2`;
     this.calculation = calculation;
-    this.area = this.dimensions.side ** 2;
+    this.area = (this.dimensions.side ** 2).toFixed(2);
     return this.area;
   }
 
@@ -66,7 +63,7 @@ class Shape {
 
     const formula = "length * breadth";
     const calculation = `${this.dimensions.length} * ${this.dimensions.breadth}`;
-    this.area = this.dimensions.length * this.dimensions.breadth;
+    this.area = (this.dimensions.length * this.dimensions.breadth).toFixed(2);
     this.formula = formula;
     this.calculation = calculation;
     return this.area;
@@ -86,7 +83,7 @@ class Shape {
     const calculation = `√${s} * (${s} - ${length_a}) * (${s} - ${length_b})  * (${s} - ${length_c})`;
     const X = (s * (s - length_a) * (s - length_b) * (s - length_c));
     const area = Math.sqrt(X);
-    this.area = area;
+    this.area = area.toFixed(2);
     this.calculation = calculation;
     this.formula = formula;
     return this.area;
@@ -104,7 +101,7 @@ class Shape {
     const formula = "π * radius²";
     const D = this.dimensions.radius ** 2;
     const calculation = `${Math.PI} * ${D}`;
-    this.area = area;
+    this.area = area.toFixed(2);
     this.calculation = calculation;
     this.formula = formula;
     return this.area;
