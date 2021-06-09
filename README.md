@@ -54,7 +54,7 @@ Read the docs: https://documenter.getpostman.com/view/7357882/TzY68EBR
 
   ### DATABASE
   Provide the mongoDB uri on the .env file
-  In my case used [node-with-oop](https://mongodb.com)
+  In my case used [mongoDB](https://mongodb.com)
  ### Spin up the server
 
  Using nodemon
