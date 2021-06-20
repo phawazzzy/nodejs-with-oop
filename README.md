@@ -78,7 +78,7 @@ build the docker file if you havent before
 run the docker file
 
 ```bash
-docker run -p 4000:3000 node-with-oop
+docker run -p 3000:3000 node-with-oop
 ```
 # Note!!!
 Create the .env file before building with docker
